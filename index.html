@@ -603,7 +603,6 @@
                 this.vx = (Math.random() - 0.5) * 0.3; // Max ~10px per second at 60fps
                 this.vy = (Math.random() - 0.5) * 0.3;
                 this.radius = 2;
-                this.connections = [];
             }
 
             update() {
@@ -782,10 +781,14 @@
             const nodeCount = Math.floor((screensaverCanvas.width * screensaverCanvas.height) / 12000);
             
             for (let i = 0; i < nodeCount; i++) {
-                screensaverNodes.push(new Node(
-                    Math.random() * screensaverCanvas.width,
-                    Math.random() * screensaverCanvas.height
-                ));
+                // Create plain objects for screensaver nodes to keep them independent
+                screensaverNodes.push({
+                    x: Math.random() * screensaverCanvas.width,
+                    y: Math.random() * screensaverCanvas.height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    radius: 2
+                });
             }
         }
 
