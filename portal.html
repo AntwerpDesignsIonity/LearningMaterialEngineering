@@ -379,13 +379,13 @@
 
         <!-- Navigation Tabs -->
         <div class="tabs">
-            <button class="tab-button active" onclick="showTab('overview')">Overview</button>
-            <button class="tab-button" onclick="showTab('iot')">IoT</button>
-            <button class="tab-button" onclick="showTab('ai')">AI</button>
-            <button class="tab-button" onclick="showTab('it')">IT</button>
-            <button class="tab-button" onclick="showTab('cloud')">Cloud</button>
-            <button class="tab-button" onclick="showTab('engineering')">Engineering</button>
-            <button class="tab-button" onclick="showTab('about')">About</button>
+            <button class="tab-button active" onclick="showTab('overview', event)">Overview</button>
+            <button class="tab-button" onclick="showTab('iot', event)">IoT</button>
+            <button class="tab-button" onclick="showTab('ai', event)">AI</button>
+            <button class="tab-button" onclick="showTab('it', event)">IT</button>
+            <button class="tab-button" onclick="showTab('cloud', event)">Cloud</button>
+            <button class="tab-button" onclick="showTab('engineering', event)">Engineering</button>
+            <button class="tab-button" onclick="showTab('about', event)">About</button>
         </div>
 
         <!-- Content Area -->
@@ -400,35 +400,35 @@
                         <h3>🌐 IoT</h3>
                         <p>Internet of Things courses covering sensors, networks, and smart devices.</p>
                         <div class="button-group">
-                            <button class="btn btn-primary" onclick="showTab('iot')">Explore IoT</button>
+                            <button class="btn btn-primary" onclick="showTab('iot', event)">Explore IoT</button>
                         </div>
                     </div>
                     <div class="course-card">
                         <h3>🤖 AI</h3>
                         <p>Artificial Intelligence and Machine Learning fundamentals and applications.</p>
                         <div class="button-group">
-                            <button class="btn btn-primary" onclick="showTab('ai')">Explore AI</button>
+                            <button class="btn btn-primary" onclick="showTab('ai', event)">Explore AI</button>
                         </div>
                     </div>
                     <div class="course-card">
                         <h3>💻 IT</h3>
                         <p>Information Technology covering systems, networks, and infrastructure.</p>
                         <div class="button-group">
-                            <button class="btn btn-primary" onclick="showTab('it')">Explore IT</button>
+                            <button class="btn btn-primary" onclick="showTab('it', event)">Explore IT</button>
                         </div>
                     </div>
                     <div class="course-card">
                         <h3>☁️ Cloud</h3>
                         <p>Cloud platforms including Google Firebase and Microsoft Azure.</p>
                         <div class="button-group">
-                            <button class="btn btn-primary" onclick="showTab('cloud')">Explore Cloud</button>
+                            <button class="btn btn-primary" onclick="showTab('cloud', event)">Explore Cloud</button>
                         </div>
                     </div>
                     <div class="course-card">
                         <h3>⚙️ Engineering</h3>
                         <p>Practical engineering skills from artisan to advanced levels.</p>
                         <div class="button-group">
-                            <button class="btn btn-primary" onclick="showTab('engineering')">Explore Engineering</button>
+                            <button class="btn btn-primary" onclick="showTab('engineering', event)">Explore Engineering</button>
                         </div>
                     </div>
                 </div>
@@ -721,7 +721,7 @@
 
     <script>
         // Tab switching functionality
-        function showTab(tabName) {
+        function showTab(tabName, event) {
             // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
@@ -734,7 +734,9 @@
             document.getElementById(tabName).classList.add('active');
             
             // Add active class to clicked button
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
 
         // Set last updated date
