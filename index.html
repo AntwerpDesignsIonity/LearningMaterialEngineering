@@ -91,8 +91,8 @@
         }
 
         body.dark-mode .banner-title {
-            color: var(--black);
-            text-shadow: 0 0 10px var(--neon-end), 0 0 20px var(--white);
+            color: var(--navy-blue);
+            text-shadow: 0 0 10px var(--neon-end), 0 0 20px var(--neon-start);
             background: var(--white);
             padding: 10px 30px;
             border-radius: 5px;
@@ -424,8 +424,8 @@
     <canvas id="backdrop-canvas"></canvas>
 
     <!-- Dark mode toggle -->
-    <div class="dark-mode-toggle" onclick="toggleDarkMode()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <div class="dark-mode-toggle" onclick="toggleDarkMode()" role="button" aria-label="Toggle dark mode" tabindex="0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
         </svg>
     </div>
@@ -439,34 +439,34 @@
     <div class="container">
         <div class="content">
             <!-- Tabs -->
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('home')">Home</div>
-                <div class="tab" onclick="switchTab('services')">Services</div>
-                <div class="tab" onclick="switchTab('about')">About</div>
-                <div class="tab" onclick="switchTab('contact')">Contact</div>
-                <div class="tab" onclick="switchTab('chat')">Chat Log</div>
+            <div class="tabs" role="tablist">
+                <div class="tab active" onclick="switchTab('home')" role="tab" id="home-tab" aria-selected="true" aria-controls="home-content">Home</div>
+                <div class="tab" onclick="switchTab('services')" role="tab" id="services-tab" aria-selected="false" aria-controls="services-content">Services</div>
+                <div class="tab" onclick="switchTab('about')" role="tab" id="about-tab" aria-selected="false" aria-controls="about-content">About</div>
+                <div class="tab" onclick="switchTab('contact')" role="tab" id="contact-tab" aria-selected="false" aria-controls="contact-content">Contact</div>
+                <div class="tab" onclick="switchTab('chat')" role="tab" id="chat-tab" aria-selected="false" aria-controls="chat-content">Chat Log</div>
             </div>
 
             <!-- Tab Contents -->
-            <div id="home-content" class="tab-content active">
+            <div id="home-content" class="tab-content active" role="tabpanel" aria-labelledby="home-tab">
                 <h2>Welcome to IONITY</h2>
                 <p>Professional Design Engineering solutions with cutting-edge technology.</p>
                 <p>We specialize in innovative design and engineering services for modern businesses.</p>
-                <button class="button" onclick="alert('Learn More - Feature Coming Soon')">Learn More</button>
-                <button class="button" onclick="alert('Get Started - Feature Coming Soon')">Get Started</button>
+                <button class="button" onclick="alert('Learn More - Feature Coming Soon')" aria-label="Learn more about IONITY services">Learn More</button>
+                <button class="button" onclick="alert('Get Started - Feature Coming Soon')" aria-label="Get started with IONITY">Get Started</button>
             </div>
 
-            <div id="services-content" class="tab-content">
+            <div id="services-content" class="tab-content" role="tabpanel" aria-labelledby="services-tab">
                 <h2>Our Services</h2>
                 <p>🔹 Professional Design Engineering</p>
                 <p>🔹 CAD Product Design</p>
                 <p>🔹 Web Development & Design</p>
                 <p>🔹 AI & Technology Integration</p>
                 <p>🔹 Custom Engineering Solutions</p>
-                <button class="button" onclick="alert('Request Quote - Feature Coming Soon')">Request Quote</button>
+                <button class="button" onclick="alert('Request Quote - Feature Coming Soon')" aria-label="Request a quote for services">Request Quote</button>
             </div>
 
-            <div id="about-content" class="tab-content">
+            <div id="about-content" class="tab-content" role="tabpanel" aria-labelledby="about-tab">
                 <h2>About IONITY (Pty) Ltd</h2>
                 <p>IONITY is part of the Antwerp Ecosystems Design Ionity (AEDI) group.</p>
                 <p>We are committed to delivering professional, innovative solutions with precision and excellence.</p>
@@ -475,7 +475,7 @@
                 <p style="margin-top: 20px; font-style: italic;">ANYTHING IS POSSIBLE WITH GOD ❤️</p>
             </div>
 
-            <div id="contact-content" class="tab-content">
+            <div id="contact-content" class="tab-content" role="tabpanel" aria-labelledby="contact-tab">
                 <h2>Contact Information</h2>
                 <p><strong>Cell Office:</strong> +27 646 999877</p>
                 <p><strong>Email Services:</strong> <a href="mailto:services@ionity.world" class="footer-link">services@ionity.world</a></p>
@@ -487,13 +487,13 @@
                 </p>
             </div>
 
-            <div id="chat-content" class="tab-content">
+            <div id="chat-content" class="tab-content" role="tabpanel" aria-labelledby="chat-tab">
                 <h2>Chat History Log</h2>
                 <p>Real-time chat log storage with local persistence.</p>
-                <button class="button" onclick="addChatMessage()">Add Test Message</button>
-                <button class="button" onclick="clearChatLog()">Clear Log</button>
-                <button class="button" onclick="downloadChatLog()">Download Log</button>
-                <div id="chat-log" class="chat-log"></div>
+                <button class="button" onclick="addChatMessage()" aria-label="Add a test message to the chat log">Add Test Message</button>
+                <button class="button" onclick="clearChatLog()" aria-label="Clear all chat log messages">Clear Log</button>
+                <button class="button" onclick="downloadChatLog()" aria-label="Download chat log as text file">Download Log</button>
+                <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
             </div>
         </div>
     </div>
@@ -562,16 +562,18 @@
                 content.classList.remove('active');
             });
 
-            // Remove active class from all tabs
+            // Remove active class from all tabs and update ARIA
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
             });
 
             // Show selected tab content
             document.getElementById(tabName + '-content').classList.add('active');
 
-            // Add active class to clicked tab
+            // Add active class to clicked tab and update ARIA
             event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
 
             // Reset inactivity timer
             resetInactivityTimer();
@@ -598,8 +600,8 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.vx = (Math.random() - 0.5) * 0.5; // Max 10px per second at 60fps = ~0.16px per frame
-                this.vy = (Math.random() - 0.5) * 0.5;
+                this.vx = (Math.random() - 0.5) * 0.3; // Max ~10px per second at 60fps
+                this.vy = (Math.random() - 0.5) * 0.3;
                 this.radius = 2;
                 this.connections = [];
             }
@@ -628,11 +630,11 @@
                     }
                 }
 
-                // Limit velocity
+                // Limit velocity to max ~10px per second
                 const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-                if (speed > 0.5) {
-                    this.vx = (this.vx / speed) * 0.5;
-                    this.vy = (this.vy / speed) * 0.5;
+                if (speed > 0.3) {
+                    this.vx = (this.vx / speed) * 0.3;
+                    this.vy = (this.vy / speed) * 0.3;
                 }
             }
 
