@@ -481,6 +481,12 @@
         let mouseX = 0;
         let mouseY = 0;
         let mouseInfluence = false;
+        
+        // Constants
+        const NODE_DENSITY = 15000; // pixels per node
+        const SCREENSAVER_NODE_DENSITY = 10000; // pixels per node
+        const SCREENSAVER_TIMEOUT = 60000; // milliseconds (60 seconds)
+        const MAX_NODE_VELOCITY = 0.16; // max 10 pixels per second at 60fps
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -489,13 +495,15 @@
         }
 
         class Node {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5; // Max 10 pixels per second at 60fps = ~0.16 per frame
-                this.vy = (Math.random() - 0.5) * 0.5;
+            constructor(canvasWidth, canvasHeight) {
+                this.x = Math.random() * canvasWidth;
+                this.y = Math.random() * canvasHeight;
+                this.vx = (Math.random() - 0.5) * MAX_NODE_VELOCITY * 2;
+                this.vy = (Math.random() - 0.5) * MAX_NODE_VELOCITY * 2;
                 this.radius = Math.random() * 2 + 1;
                 this.energy = Math.random();
+                this.canvasWidth = canvasWidth;
+                this.canvasHeight = canvasHeight;
             }
 
             update() {
@@ -515,11 +523,11 @@
                 this.y += this.vy;
 
                 // Boundaries
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                if (this.x < 0 || this.x > this.canvasWidth) this.vx *= -1;
+                if (this.y < 0 || this.y > this.canvasHeight) this.vy *= -1;
 
-                this.x = Math.max(0, Math.min(canvas.width, this.x));
-                this.y = Math.max(0, Math.min(canvas.height, this.y));
+                this.x = Math.max(0, Math.min(this.canvasWidth, this.x));
+                this.y = Math.max(0, Math.min(this.canvasHeight, this.y));
 
                 // Energy pulsing
                 this.energy += 0.01;
@@ -548,9 +556,9 @@
 
         function initNodes() {
             nodes = [];
-            const nodeCount = Math.floor((canvas.width * canvas.height) / 15000);
+            const nodeCount = Math.floor((canvas.width * canvas.height) / NODE_DENSITY);
             for (let i = 0; i < nodeCount; i++) {
-                nodes.push(new Node());
+                nodes.push(new Node(canvas.width, canvas.height));
             }
         }
 
@@ -642,9 +650,9 @@
             screensaverCanvas.width = window.innerWidth;
             screensaverCanvas.height = window.innerHeight;
             screensaverNodes = [];
-            const nodeCount = Math.floor((screensaverCanvas.width * screensaverCanvas.height) / 10000);
+            const nodeCount = Math.floor((screensaverCanvas.width * screensaverCanvas.height) / SCREENSAVER_NODE_DENSITY);
             for (let i = 0; i < nodeCount; i++) {
-                screensaverNodes.push(new Node());
+                screensaverNodes.push(new Node(screensaverCanvas.width, screensaverCanvas.height));
             }
         }
 
@@ -715,7 +723,7 @@
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
                 startScreensaver();
-            }, 60000); // 60 seconds
+            }, SCREENSAVER_TIMEOUT);
         }
 
         // Event listeners for screensaver
