@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Antwerp Designs Ionity Learning Portal - Comprehensive courses in IoT, AI, IT, Cloud, and Engineering">
+    <meta name="keywords" content="IoT, AI, IT, Engineering, Firebase, Azure, Learning, Courses, Education">
+    <meta name="author" content="Antwerp Designs Ionity">
+    <meta name="license" content="CC BY-NC-SA 4.0">
+    <meta property="og:title" content="Ionity Learning Portal">
+    <meta property="og:description" content="Comprehensive learning materials for IoT, AI, IT, and Engineering">
+    <meta property="og:type" content="website">
+    <title>Ionity Learning Portal - IoT, AI, IT & Engineering Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --dark-bg: #1e293b;
+            --light-bg: #f8fafc;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--text-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .tab-button:hover {
+            background: var(--light-bg);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Content Area */
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Course Cards */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .course-card {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            background: var(--light-bg);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .course-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .course-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .course-topics {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .course-topics li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .course-topics li:before {
+            content: "✓ ";
+            color: var(--success-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .video-links {
+            margin-top: 20px;
+        }
+
+        .video-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .video-link:hover {
+            background: #cc0000;
+            transform: scale(1.05);
+        }
+
+        .video-link:before {
+            content: "▶ ";
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .metadata-item {
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .metadata-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Repository Info */
+        .repo-info {
+            background: var(--dark-bg);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .repo-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .repo-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                width: 100%;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Version Badge */
+        .version-badge {
+            display: inline-block;
+            background: var(--success-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Auto-update indicator */
+        .auto-update {
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <div class="logo">I</div>
+                <div>
+                    <h1>Ionity Learning Portal <span class="version-badge">v1.0.0</span></h1>
+                    <p class="subtitle">Comprehensive Learning Materials for Modern Technology</p>
+                </div>
+            </div>
+            <div class="auto-update">
+                🔄 Auto-Updated via CI/CD Pipeline - Always Current Content
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('overview', event)">Overview</button>
+            <button class="tab-button" onclick="showTab('iot', event)">IoT</button>
+            <button class="tab-button" onclick="showTab('ai', event)">AI</button>
+            <button class="tab-button" onclick="showTab('it', event)">IT</button>
+            <button class="tab-button" onclick="showTab('cloud', event)">Cloud</button>
+            <button class="tab-button" onclick="showTab('engineering', event)">Engineering</button>
+            <button class="tab-button" onclick="showTab('about', event)">About</button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <h2>Welcome to Ionity Learning Portal</h2>
+                <p>Your comprehensive resource for learning IoT, AI, IT, Cloud Technologies, and Engineering. All materials are carefully curated and regularly updated through our automated CI/CD pipeline.</p>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <h3>🌐 IoT</h3>
+                        <p>Internet of Things courses covering sensors, networks, and smart devices.</p>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showTab('iot', event)">Explore IoT</button>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <h3>🤖 AI</h3>
+                        <p>Artificial Intelligence and Machine Learning fundamentals and applications.</p>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showTab('ai', event)">Explore AI</button>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <h3>💻 IT</h3>
+                        <p>Information Technology covering systems, networks, and infrastructure.</p>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showTab('it', event)">Explore IT</button>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <h3>☁️ Cloud</h3>
+                        <p>Cloud platforms including Google Firebase and Microsoft Azure.</p>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showTab('cloud', event)">Explore Cloud</button>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <h3>⚙️ Engineering</h3>
+                        <p>Practical engineering skills from artisan to advanced levels.</p>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="showTab('engineering', event)">Explore Engineering</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="repo-info">
+                    <h3>📚 Repository Information</h3>
+                    <p>This portal is maintained through our GitHub repository with automated updates.</p>
+                    <p><strong>Repository:</strong> <a href="https://github.com/AntwerpDesignsIonity/LearningMaterialEngineering" target="_blank">AntwerpDesignsIonity/LearningMaterialEngineering</a></p>
+                    <p><strong>License:</strong> CC BY-NC-SA 4.0</p>
+                </div>
+            </div>
+
+            <!-- IoT Tab -->
+            <div id="iot" class="tab-content">
+                <h2>🌐 Internet of Things (IoT) Courses</h2>
+                <p>Explore the world of connected devices, sensors, and smart systems.</p>
+                
+                <div class="course-card">
+                    <h3>IoT Fundamentals</h3>
+                    <p>Learn the basics of Internet of Things technology and architecture.</p>
+                    
+                    <ul class="course-topics">
+                        <li>IoT Architecture & Design</li>
+                        <li>Sensor Networks & Data Collection</li>
+                        <li>MQTT Protocol & Communication</li>
+                        <li>IoT Security & Privacy</li>
+                        <li>Edge Computing</li>
+                        <li>Smart Device Development</li>
+                    </ul>
+
+                    <div class="video-links">
+                        <h4>Video Tutorials:</h4>
+                        <a href="https://www.youtube.com/watch?v=LlhmzVL5bm8" target="_blank" class="video-link">IoT Full Course</a>
+                        <a href="https://www.youtube.com/watch?v=uLHMD0fdpC4" target="_blank" class="video-link">IoT with Arduino</a>
+                        <a href="https://www.youtube.com/watch?v=xPlN_Tk3VLQ" target="_blank" class="video-link">ESP32 IoT Projects</a>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="courses/IoT/README.md" class="btn btn-secondary">View Course Materials</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tab -->
+            <div id="ai" class="tab-content">
+                <h2>🤖 Artificial Intelligence Courses</h2>
+                <p>Master AI and Machine Learning technologies shaping the future.</p>
+                
+                <div class="course-card">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Comprehensive courses on artificial intelligence and machine learning.</p>
+                    
+                    <ul class="course-topics">
+                        <li>Machine Learning Basics</li>
+                        <li>Deep Learning & Neural Networks</li>
+                        <li>Natural Language Processing</li>
+                        <li>Computer Vision</li>
+                        <li>AI Ethics & Responsible AI</li>
+                        <li>TensorFlow & PyTorch</li>
+                    </ul>
+
+                    <div class="video-links">
+                        <h4>Video Tutorials:</h4>
+                        <a href="https://www.youtube.com/watch?v=JMUxmLyrhSk" target="_blank" class="video-link">AI Full Course</a>
+                        <a href="https://www.youtube.com/watch?v=ukzFI9rgwfU" target="_blank" class="video-link">ML Crash Course</a>
+                        <a href="https://www.youtube.com/watch?v=CS4cs9xVecg" target="_blank" class="video-link">Deep Learning</a>
+                        <a href="https://www.youtube.com/watch?v=tPYj3fFJGjk" target="_blank" class="video-link">TensorFlow Tutorial</a>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="courses/AI/README.md" class="btn btn-secondary">View Course Materials</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IT Tab -->
+            <div id="it" class="tab-content">
+                <h2>💻 Information Technology Courses</h2>
+                <p>Build strong IT fundamentals in systems, networks, and infrastructure.</p>
+                
+                <div class="course-card">
+                    <h3>IT Fundamentals</h3>
+                    <p>Essential IT skills for modern technology professionals.</p>
+                    
+                    <ul class="course-topics">
+                        <li>Network Administration</li>
+                        <li>System Administration</li>
+                        <li>Cybersecurity Essentials</li>
+                        <li>Database Management</li>
+                        <li>DevOps Practices</li>
+                        <li>Cloud Computing Basics</li>
+                    </ul>
+
+                    <div class="video-links">
+                        <h4>Video Tutorials:</h4>
+                        <a href="https://www.youtube.com/watch?v=awLnur5Yt9o" target="_blank" class="video-link">IT Fundamentals</a>
+                        <a href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank" class="video-link">Networking Course</a>
+                        <a href="https://www.youtube.com/watch?v=wBp0Rb-ZJak" target="_blank" class="video-link">Linux Administration</a>
+                        <a href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank" class="video-link">Docker Tutorial</a>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="courses/IT/README.md" class="btn btn-secondary">View Course Materials</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Tab -->
+            <div id="cloud" class="tab-content">
+                <h2>☁️ Cloud Platform Courses</h2>
+                <p>Learn leading cloud platforms and services.</p>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <h3>Google Firebase</h3>
+                        <p>Master Firebase for app development.</p>
+                        
+                        <ul class="course-topics">
+                            <li>Firebase Authentication</li>
+                            <li>Cloud Firestore</li>
+                            <li>Realtime Database</li>
+                            <li>Cloud Functions</li>
+                            <li>Firebase Hosting</li>
+                            <li>Firebase Storage</li>
+                        </ul>
+
+                        <div class="video-links">
+                            <h4>Video Tutorials:</h4>
+                            <a href="https://www.youtube.com/watch?v=9kRgVxULbag" target="_blank" class="video-link">Firebase Tutorial</a>
+                            <a href="https://www.youtube.com/watch?v=8sGY55yxicA" target="_blank" class="video-link">Firebase Auth</a>
+                        </div>
+
+                        <div class="button-group">
+                            <a href="courses/Google/Firebase/README.md" class="btn btn-secondary">View Materials</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <h3>Microsoft Azure</h3>
+                        <p>Comprehensive Azure cloud services.</p>
+                        
+                        <ul class="course-topics">
+                            <li>Azure Virtual Machines</li>
+                            <li>Azure Functions</li>
+                            <li>Azure SQL Database</li>
+                            <li>Azure Storage</li>
+                            <li>Azure Active Directory</li>
+                            <li>Azure DevOps</li>
+                        </ul>
+
+                        <div class="video-links">
+                            <h4>Video Tutorials:</h4>
+                            <a href="https://www.youtube.com/watch?v=NKEFWyqJ5XA" target="_blank" class="video-link">Azure Fundamentals</a>
+                            <a href="https://www.youtube.com/watch?v=4BibQ69MD8c" target="_blank" class="video-link">Azure DevOps</a>
+                        </div>
+
+                        <div class="button-group">
+                            <a href="courses/Microsoft/Azure/README.md" class="btn btn-secondary">View Materials</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Engineering Tab -->
+            <div id="engineering" class="tab-content">
+                <h2>⚙️ Engineering Courses</h2>
+                <p>Hands-on engineering courses from artisan to advanced levels.</p>
+                
+                <div class="course-card">
+                    <h3>Artisan Engineering</h3>
+                    <p>Practical engineering skills combining craftsmanship with technology.</p>
+                    
+                    <ul class="course-topics">
+                        <li>Practical Engineering Skills</li>
+                        <li>Manufacturing Techniques</li>
+                        <li>Quality Control & Assurance</li>
+                        <li>Tool Mastery</li>
+                        <li>Design Thinking</li>
+                        <li>Problem Solving</li>
+                    </ul>
+
+                    <div class="video-links">
+                        <h4>Video Tutorials:</h4>
+                        <a href="https://www.youtube.com/watch?v=Fqg-E8FUaJQ" target="_blank" class="video-link">Engineering Fundamentals</a>
+                        <a href="https://www.youtube.com/watch?v=xZh_UpvY37s" target="_blank" class="video-link">Manufacturing Processes</a>
+                        <a href="https://www.youtube.com/watch?v=E3B_dDZNgfg" target="_blank" class="video-link">CAD Design</a>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="courses/Engineering/Artisan/README.md" class="btn btn-secondary">View Course Materials</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Tab -->
+            <div id="about" class="tab-content">
+                <h2>About Ionity Learning Portal</h2>
+                <p>This portal serves as a comprehensive learning resource maintained by Antwerp Designs Ionity.</p>
+
+                <div class="metadata">
+                    <div class="metadata-item">
+                        <strong>Organization:</strong>
+                        Antwerp Designs Ionity
+                    </div>
+                    <div class="metadata-item">
+                        <strong>License:</strong>
+                        CC BY-NC-SA 4.0
+                    </div>
+                    <div class="metadata-item">
+                        <strong>Version:</strong>
+                        v1.0.0
+                    </div>
+                    <div class="metadata-item">
+                        <strong>Last Updated:</strong>
+                        <span id="lastUpdated">Auto-updated via CI/CD</span>
+                    </div>
+                </div>
+
+                <div class="repo-info">
+                    <h3>🔄 Continuous Integration & Deployment</h3>
+                    <p>This portal is automatically updated through our CI/CD pipeline, ensuring all content remains current and accurate.</p>
+                    <p><strong>Repository:</strong> <a href="https://github.com/AntwerpDesignsIonity/LearningMaterialEngineering" target="_blank">AntwerpDesignsIonity/LearningMaterialEngineering</a></p>
+                    <p><strong>Auto-versioning:</strong> Enabled</p>
+                    <p><strong>Update Frequency:</strong> On every commit</p>
+                </div>
+
+                <h3>📋 License Information</h3>
+                <p>All materials in this portal are licensed under <strong>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)</strong>.</p>
+                
+                <div class="course-card">
+                    <h4>You are free to:</h4>
+                    <ul class="course-topics">
+                        <li>Share — copy and redistribute the material</li>
+                        <li>Adapt — remix, transform, and build upon the material</li>
+                    </ul>
+                    
+                    <h4>Under the following terms:</h4>
+                    <ul class="course-topics">
+                        <li>Attribution — Give appropriate credit</li>
+                        <li>NonCommercial — Not for commercial use</li>
+                        <li>ShareAlike — Distribute under same license</li>
+                    </ul>
+
+                    <div class="button-group">
+                        <a href="LICENSE.txt" class="btn btn-primary">View Full License</a>
+                        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+
+                <h3>🎯 Embedding This Portal</h3>
+                <p>This static HTML portal can be easily embedded in other websites or shared directly. Simply download the HTML file and host it on your platform, or use it as a standalone resource.</p>
+                
+                <div class="course-card">
+                    <h4>Usage Options:</h4>
+                    <ul class="course-topics">
+                        <li>Embed in existing websites via iframe</li>
+                        <li>Host on your own web server</li>
+                        <li>Use as standalone offline resource</li>
+                        <li>Share direct link to GitHub Pages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="metadata">
+                <div class="metadata-item">
+                    <strong>Maintained by:</strong>
+                    Antwerp Designs Ionity
+                </div>
+                <div class="metadata-item">
+                    <strong>Contact:</strong>
+                    Via GitHub Repository
+                </div>
+                <div class="metadata-item">
+                    <strong>License:</strong>
+                    <a href="LICENSE.txt">CC BY-NC-SA 4.0</a>
+                </div>
+                <div class="metadata-item">
+                    <strong>Repository:</strong>
+                    <a href="https://github.com/AntwerpDesignsIonity/LearningMaterialEngineering" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <p style="margin-top: 20px; color: var(--text-light);">
+                © 2025 Antwerp Designs Ionity | All course materials are licensed under CC BY-NC-SA 4.0
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabName, event) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+
+        // Set last updated date
+        document.addEventListener('DOMContentLoaded', function() {
+            const lastUpdatedElement = document.getElementById('lastUpdated');
+            if (lastUpdatedElement) {
+                const now = new Date();
+                lastUpdatedElement.textContent = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
