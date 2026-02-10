@@ -1,9 +1,26 @@
 {
-  "name": "demo-repo",
-  "version": "0.2.0",
-  "description": "A sample package.json",
-  "dependencies": {
-    "@primer/css": "17.0.1"
+  "name": "ionity-iot-training-hub",
+  "version": "1.0.0",
+  "description": "Comprehensive IoT, AI, Networking, Encryption and Software Development training hub - ionity.pty.ltd",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "test": "echo \"No tests configured\" && exit 0"
   },
-  "license": "MIT"
+  "keywords": [
+    "IoT",
+    "AI",
+    "Machine Learning",
+    "Networking",
+    "Encryption",
+    "Training",
+    "Education",
+    "Software Development"
+  ],
+  "author": "Johan Wilhelm van Antwerp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntwerpDesignsIonity/LearningMaterialEngineering.git"
+  }
 }
